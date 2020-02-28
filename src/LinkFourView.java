@@ -1,11 +1,14 @@
 import javax.swing.*;  
 import java.awt.*;
+import java.awt.event.*;
+import javax.swing.border.*;
 
 public class LinkFourView {
-	
+	private int rowSize=7;
+	private int colSize=6;
+	private JLabel[][] spots;
 	JFrame frame = new JFrame("Link Four");
-	JButton button;
-	JPanel panel1 = new JPanel();
+	JPanel panel1 = (JPanel) frame.getContentPane();
 	JLabel label;
 	GridBagConstraints c = new GridBagConstraints();
 	
@@ -34,99 +37,38 @@ public class LinkFourView {
         menu = new JMenu("Help"); 
         m = new JMenuItem("About"); 
         menu.add(m); 
-        menuBar.add(menu); 
-        
-        
-
-  
-        
+        menuBar.add(menu);
   
         // add menubar to frame 
-        frame.setJMenuBar(menuBar); 
-		
+        frame.setJMenuBar(menuBar);
+
 	}
+
 	public void CreateGrid()
 	{
-		
-		
-		ImageIcon black = new ImageIcon("black.png");
-		Image image = black.getImage(); // transform it 
-		Image scaledImage = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		black = new ImageIcon(scaledImage);  // transform it back
-		
-		ImageIcon yellow = new ImageIcon("black.png");
-		image = yellow.getImage(); // transform it 
-		scaledImage = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-		yellow = new ImageIcon(scaledImage);  // transform it back
+		JButton button;
+		Board gameBoard = new Board();
+		panel1.setLayout(new GridLayout(rowSize, colSize +1));
+		spots = new JLabel[rowSize][colSize];
 
-		panel1.setLayout(new GridBagLayout());
-
-		
-		button = new JButton("1");
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 0;
-		c.gridy = 0;
-		panel1.add(button, c);
-
-		button = new JButton("2");
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 1;
-		c.gridy = 0;
-		panel1.add(button, c);
-		
-		button = new JButton("3");
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 2;
-		c.gridy = 0;
-		panel1.add(button, c);
-		
-		button = new JButton("4");
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 3;
-		c.gridy = 0;
-		panel1.add(button, c);
-		
-		button = new JButton("5");
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 4;
-		c.gridy = 0;
-		panel1.add(button, c);
-		
-		button = new JButton("6");
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 5;
-		c.gridy = 0;
-		panel1.add(button, c);
-		
-		button = new JButton("7");
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.gridx = 6;
-		c.gridy = 0;
-		panel1.add(button, c);
-		
-		for (int i = 0; i <= 6; i++)
-		{
-			for (int j = 1; j <= 6; j++)
-			{
-				label = new JLabel(black);
-				label.setBorder(BorderFactory.createLineBorder(Color.black));
-				c.fill = GridBagConstraints.HORIZONTAL;
-				c.ipadx = 10;
-				c.ipady = 10;
-				c.gridx = i;
-				c.gridy = j;
-				panel1.add(label, c);
-				
+		for (int csize =0; csize < colSize; csize++){
+			for(int rsize =0; rsize<rsize; rsize++){
+				spots[rsize][csize] = new JLabel();
+				spots[rsize][csize].setHorizontalAlignment(SwingConstants.CENTER);
+				spots[rsize][csize].setBorder(BorderFactory.createLineBorder(Color.black));
+				panel1.add(spots[rsize][csize]);
 			}
 		}
-		
+
+
 		CreatePlayerTags();
-		
-		frame.setResizable(false);
-		frame.add(panel1);
+		frame.setContentPane(panel1);
+		frame.setSize(700, 600);
+		//frame.add(panel1);
 		frame.pack();
 		frame.setVisible(true);
 	}
+
 	public void CreatePlayerTags()
 	{
 		JPanel panel2 = new JPanel();
@@ -146,8 +88,5 @@ public class LinkFourView {
 		c.gridx = 4;
 		c.gridy = 7;
 		panel1.add(label, c);
-		
-
-		
 	}
 }
