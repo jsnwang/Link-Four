@@ -7,7 +7,8 @@ public class Board {
 
     public Board() {
         rowSize = 7;
-        colSize = 6;
+        colSize = 8;
+        //6
 
         gridArray = new int[rowSize][colSize];
         for(int j = 0; j <rowSize; j++) {
