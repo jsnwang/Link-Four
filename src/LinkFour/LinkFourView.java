@@ -3,8 +3,9 @@ package LinkFour;
 
 import javax.swing.*;  
 import java.awt.*;
+import java.awt.event.*; 
 import java.io.*; 
-public class LinkFourView {
+public class LinkFourView implements ActionListener {
 	
     private JFrame frame = new JFrame("Link Four");
     private JLabel[][] slots;
@@ -13,6 +14,7 @@ public class LinkFourView {
     private int gridX = 7;
     private int gridY = 6;
 	
+    
 	public void CreateMenuBar()
 	{
 		JMenuBar menuBar = new JMenuBar();
@@ -24,22 +26,39 @@ public class LinkFourView {
   
         // create File Menu
         menu = new JMenu("File"); 
-  
+        menu.setMnemonic(KeyEvent.VK_F);
+        
         // create menuitems 
-        m = new JMenuItem("New"); 
+        m = new JMenuItem("New Game"); 
+        m.setMnemonic(KeyEvent.VK_N);
+        m.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CreateGrid();
+            }
+        });
         menu.add(m); 
         
         m = new JMenuItem("Exit"); 
+        m.setMnemonic(KeyEvent.VK_E);
+        m.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	System.exit(0);
+            }
+        });
         menu.add(m);
         
         // add menu to menu bar 
         menuBar.add(menu); 
         
         menu = new JMenu("Help"); 
+        menu.setMnemonic(KeyEvent.VK_H);
+        
         m = new JMenuItem("About"); 
+        m.setMnemonic(KeyEvent.VK_A);
         menu.add(m); 
         menuBar.add(menu); 
         
+        //m1.addActionListener(menu); 
         
 
   
@@ -53,14 +72,22 @@ public class LinkFourView {
 	{
 		
 		JPanel panel = (JPanel) frame.getContentPane();
+		panel.removeAll();
+		
+		
 		ImageIcon black = new ImageIcon("black.png");
 		Image image = black.getImage(); // transform it 
-		Image scaledImage = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		Image scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		black = new ImageIcon(scaledImage);  // transform it back
+		
+		ImageIcon white = new ImageIcon("white.png");
+		image = white.getImage(); // transform it 
+		scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		white = new ImageIcon(scaledImage);  // transform it back
 		
 		ImageIcon yellow = new ImageIcon("yellow.png");
 		image = yellow.getImage(); // transform it 
-		scaledImage = image.getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
+		scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
 		yellow = new ImageIcon(scaledImage);  // transform it back
 
 		panel.setLayout(new GridLayout(gridX,gridY));
@@ -79,7 +106,7 @@ public class LinkFourView {
         for (int i = 0; i < gridX; i++) {
             for (int j = 1; j <= gridY; j++) {
             	System.out.println(i +", " +j);
-                slots[i][j] = new JLabel();
+                slots[i][j] = new JLabel(white);
                 slots[i][j].setHorizontalAlignment(SwingConstants.CENTER);
                 slots[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.add(slots[i][j]);
@@ -106,4 +133,13 @@ public class LinkFourView {
 		label.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	*/
-}
+	
+	public void actionPerformed(ActionEvent e) 
+    { 
+        CreateGrid();
+  
+        // set the label to the menuItem that is selected 
+       
+    } 
+} 
+

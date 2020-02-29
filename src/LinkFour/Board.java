@@ -1,53 +1,43 @@
 package LinkFour;
 
+import java.awt.Color;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+
 public class Board {
-	 private int xsize;
-	    private int ysize;
-	    private int[][] matrix;
-	    private int cells_left = 0;
 
-	    public Board() {
-	        xsize = 7;
-	        ysize = 6;
+	 private int[][] board;
+	 private int cellsLeft = 0;
 
-	        matrix = new int[xsize][ysize];
-	        for (int i = 0; i < xsize; i++) {
-	            for (int j = 0; j < ysize; j++) {
-	                matrix[i][j] = 0;
-	                cells_left++;
-	            }
-	        }
+	 public Board() {
+
+		board = new int[7][6];
+	    for (int i = 0; i < 7; i++) {
+	    	for (int j = 0; j < 6; j++) {
+	    		board[i][j] = -1;
+	    		cellsLeft++;
+	    	}
 	    }
-	    //methods to gain access to internal private data
+	 }
 
-	    public int get_cells_left() {
-	        return cells_left;
+	    public int[][] getBoard() {
+	        return board;
 	    }
 
-	    public int[][] get_matrix() {
-	        return matrix;
+	    public boolean boardEquals(int a, int b, int c) {
+	        return board[a][b] == c;
 	    }
 
-	    public boolean matrix_equals(int a, int b, int c) {
-	        return matrix [a][b] == c;
+	    public void setBoard(int a, int b, int player) {
+	        board[a][b] = player;
 	    }
 
-	    public void set_matrix(int a, int b, int temp_player) {
-	        matrix[a][b] = temp_player;
-	    }
 
-	    public int get_xsize() {//returns the xsize
-	        return xsize;
-	    }
-
-	    public int get_ysize() {//returns the xsize
-	        return ysize;
-	    }
-
-	    public int find_y(int x) {//checks for room in collumn and returns free spot.
+	    public int findSpot(int x) {
 	        int y = -1;
-	        for (int i = 0; i < ysize; i++) {
-	            if (matrix[x][i] == 0) {
+	        for (int i = 0; i < 7; i++) {
+	            if (board[x][i] == 0) {
 	                y = i;
 	            }
 	        }
