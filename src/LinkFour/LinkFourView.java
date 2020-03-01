@@ -17,6 +17,9 @@ public class LinkFourView implements ActionListener {
     public ImageIcon black;
     public ImageIcon yellow;
     public ImageIcon white;
+    
+    Image image;
+    Image scaledImage;
 
     private int gridX = 7;
     private int gridY = 6;
@@ -67,15 +70,12 @@ public class LinkFourView implements ActionListener {
         
         //m1.addActionListener(menu); 
         
-
-  
-        
-  
         // add menubar to frame 
         frame.setJMenuBar(menuBar); 
 		
 	}
 
+	
 //	public void setPlayerColor() {
     //  }
 
@@ -85,25 +85,14 @@ public class LinkFourView implements ActionListener {
 		
 		JPanel panel = (JPanel) frame.getContentPane();
 		panel.removeAll();
-         black = new ImageIcon("black.png");
-        Image image = black.getImage(); // transform it
-        Image scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        black = new ImageIcon(scaledImage);  // transform it back
 
-        yellow = new ImageIcon("yellow.png");
-        image = yellow.getImage(); // transform it
-        scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        yellow = new ImageIcon(scaledImage);  // transform it back
-
-		 white = new ImageIcon("white.png");
-		 image = white.getImage(); // transform it
+		white = new ImageIcon("white.png");
+		image = white.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
 		white = new ImageIcon(scaledImage);  // transform it back
 		
-
-
-		panel.setLayout(new GridLayout(gridX,gridY));
-		slots = new JLabel[7][7];
+		panel.setLayout(new GridLayout(7, 7));
+		slots = new JLabel[6][7];
         buttons = new JButton[7];
 		buttons[0] = new JButton("1");
 		buttons[1]= new JButton("2");
@@ -119,33 +108,32 @@ public class LinkFourView implements ActionListener {
         panel.add(buttons[4]);
         panel.add(buttons[5]);
         panel.add(buttons[6]);
+        
       for(int i = 0; i < 7; i++){
           buttons[i].setActionCommand("" + i);
           buttons[i].addActionListener(new ActionListener() {
               @Override
               public void actionPerformed(ActionEvent e) {
                   int a = Integer.parseInt(e.getActionCommand());
-                  int y = board.findSpot(a);
-                  slots[a][y] = new JLabel(black);
-                   System.out.println(a);
+                  int y = board.CheckColumn(a);
+                  InputPiece(y, a);
+                  board.ChangePlayer();
+                  System.out.println(a);
                   System.out.println(y);
               }
           });
       }
 
         
-        for (int i = 0; i < gridX; i++) {
-            for (int j = 1; j <= gridY; j++) {
-            	//System.out.println(i +", " +j);
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+            	System.out.println(i +", " +j);
                 slots[i][j] = new JLabel(white);
                 slots[i][j].setHorizontalAlignment(SwingConstants.CENTER);
                 slots[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
                 panel.add(slots[i][j]);
             }
         }
-		//slots[0][1] = new JLabel(black);
-		//panel.add(slots[0][1]);
-		//CreatePlayerTags();
 		
 		frame.setContentPane(panel);
         frame.setSize(700, 600);
@@ -153,33 +141,33 @@ public class LinkFourView implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 	}
+	
+	
+	
+	public void InputPiece(int x, int y)
+	{
+        black = new ImageIcon("black.png");
+        image = black.getImage(); // transform it
+        scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        black = new ImageIcon(scaledImage);  // transform it back
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        yellow = new ImageIcon("yellow.png");
+        image = yellow.getImage(); // transform it
+        scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        yellow = new ImageIcon(scaledImage);  // transform it back
+        
+		if(board.playerTurn == 1)
+		{
+			slots[x][y].setIcon(black);
+		}
+		
+		else
+		{
+			slots[x][y].setIcon(yellow);
+		}
+		
+		
+	}
 	/*
 	public void CreatePlayerTags()
 	{
