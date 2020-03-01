@@ -7,7 +7,7 @@ import javax.swing.SwingConstants;
 
 public class Board {
 
-	private int[][] board = new int[7][6];
+	public int[][] board = new int[7][6];
 	public int playerTurn = 1;
 
 	 

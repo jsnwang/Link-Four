@@ -8,6 +8,7 @@ public class LinkFour {
 		LinkFourView view = new LinkFourView();
 		view.CreateMenuBar();
 		view.CreateGrid();
+		//view.CreatePlayerTags();
 		
 	}
 }

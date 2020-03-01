@@ -8,21 +8,23 @@ import java.io.*;
 import java.security.BasicPermission;
 
 public class LinkFourView implements ActionListener {
-	
+
     private JFrame frame = new JFrame("Link Four");
     public JLabel[][] slots;
+    public JLabel label;
     public JButton[] buttons;
     public String p1 = "Player 1";
     public String p2 = "Player 2";
     public ImageIcon black;
     public ImageIcon yellow;
     public ImageIcon white;
+   // CoreLogic coreLogic = new CoreLogic();
     
     Image image;
     Image scaledImage;
 
-    private int gridX = 7;
-    private int gridY = 6;
+ //   private int gridX = 7;
+   // private int gridY = 6;
 	
     Board board = new Board();
 	public void CreateMenuBar()
@@ -108,7 +110,7 @@ public class LinkFourView implements ActionListener {
         panel.add(buttons[4]);
         panel.add(buttons[5]);
         panel.add(buttons[6]);
-        
+        int max=0;
       for(int i = 0; i < 7; i++){
           buttons[i].setActionCommand("" + i);
           buttons[i].addActionListener(new ActionListener() {
@@ -116,10 +118,19 @@ public class LinkFourView implements ActionListener {
               public void actionPerformed(ActionEvent e) {
                   int a = Integer.parseInt(e.getActionCommand());
                   int y = board.CheckColumn(a);
+                 // int c=0;
+                  //int d=0;
                   InputPiece(y, a);
                   board.ChangePlayer();
+                  //if(){
+                    //  buttons[0].setEnabled(false);
+
+                  //}
                   System.out.println(a);
                   System.out.println(y);
+                 // coreLogic.gameover();
+
+
               }
           });
       }
@@ -168,8 +179,8 @@ public class LinkFourView implements ActionListener {
 		
 		
 	}
-	/*
-	public void CreatePlayerTags()
+
+	/*public void CreatePlayerTags()
 	{
 		JPanel panel2 = new JPanel();
 		label = new JLabel("Player 1 Wins:", SwingConstants.CENTER);
@@ -178,12 +189,14 @@ public class LinkFourView implements ActionListener {
 		label = new JLabel("Player 2 Wins:", SwingConstants.CENTER);
 		label.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
-	*/
+*/
+
+
 	
 	public void actionPerformed(ActionEvent e) 
     { 
         CreateGrid();
-  
+        //coreLogic.gameover();
         // set the label to the menuItem that is selected 
        
     } 
