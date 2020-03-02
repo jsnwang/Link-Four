@@ -7,48 +7,51 @@ import javax.swing.SwingConstants;
 
 public class Board {
 
-	 private int[][] board;
-	 private int cellsLeft = 0;
+	public int[][] board = new int[7][6];
+	public int playerTurn = 1;
 
-	 public Board() {
+	 
+	 
+	public Board() {
 
-		board = new int[7][6];
-	    for (int i = 0; i < 7; i++) {
-	    	for (int j = 0; j < 6; j++) {
-	    		board[i][j] = -1;
-	    		cellsLeft++;
-	    	}
+		for(int r = 0; r < 6; r++){
+			for(int c = 0; c < 7; c++){
+				board[c][r] = 0; //Loop through array and set all values to 0
+			}
+		}
+	}
+	 
+	public int CheckColumn(int col){
+		int c = col;
+		int r;
+		for(r = 0; r < 6; r++){
+			if( board[c][r] != 0){
+				if(r == 0){
+					break; //Return false if column is already filled
+				}
+				r--;
+				break;
+			}else if(r == 5){ //Last row of the column
+				break;
+			}
+		}
+		board[c][r] = playerTurn; //Set the value of that position to the player's piece
+			
+		return r;
+	}
+
+
+	public void ChangePlayer() {
+	      if(playerTurn == 1)
+	      {
+	        playerTurn = 2;
+	      }
+	      else
+	      {
+	        playerTurn = 1;
+	      }
 	    }
-	 }
-
-	    public int[][] getBoard() {
-	        return board;
-	    }
-
-	    public boolean boardEquals(int a, int b, int c) {
-	        return board[a][b] == c;
-	    }
-
-	    public void setBoard(int a, int b, int player) {
-	        board[a][b] = player;
-	    }
 
 
-	    public int findSpot(int x) {
-	        int y = -1;
-	        for (int i = 0; i < 7; i++) {
-	            if (board[x][i] == 0) {
-	                y = i;
-	            }
-	        }
-	        return y;
-	    }
 
-	    public int changeplayer(int player, int max_players) {
-	        player++;
-	        if (player > max_players) {
-	            return 1;
-	        }
-	        return player;
-	    }
 }
