@@ -1,6 +1,8 @@
 package LinkFour;
 
-import javax.swing.*;  
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class LinkFour {
 	public static void main(String[] args)
@@ -9,6 +11,19 @@ public class LinkFour {
 		view.CreateMenuBar();
 		view.CreateGrid();
 		//view.CreatePlayerTags();
-		
+		CoreLogic coreLogic = new CoreLogic();
+		coreLogic.gameover();
+
+		view.frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				view.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+				view.Close();
+			}
+
+		});
+
 	}
+
+
 }

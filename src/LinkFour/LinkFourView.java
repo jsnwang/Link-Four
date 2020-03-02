@@ -9,16 +9,18 @@ import java.security.BasicPermission;
 
 public class LinkFourView implements ActionListener {
 
-    private JFrame frame = new JFrame("Link Four");
+    public JFrame frame = new JFrame("Link Four");
+    public JFrame frame2 = new JFrame("About");
+  //  private JFrame closeFrame = new JFrame();
     public JLabel[][] slots;
-    public JLabel label;
+   // public JLabel label;
     public JButton[] buttons;
-    public String p1 = "Player 1";
-    public String p2 = "Player 2";
+   // public String p1 = "Player 1";
+    //public String p2 = "Player 2";
     public ImageIcon black;
     public ImageIcon yellow;
     public ImageIcon white;
-   // CoreLogic coreLogic = new CoreLogic();
+    CoreLogic coreLogic = new CoreLogic();
     
     Image image;
     Image scaledImage;
@@ -46,6 +48,7 @@ public class LinkFourView implements ActionListener {
         m.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 CreateGrid();
+
             }
         });
         menu.add(m); 
@@ -54,7 +57,7 @@ public class LinkFourView implements ActionListener {
         m.setMnemonic(KeyEvent.VK_E);
         m.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	System.exit(0);
+                Close();
             }
         });
         menu.add(m);
@@ -64,9 +67,26 @@ public class LinkFourView implements ActionListener {
         
         menu = new JMenu("Help"); 
         menu.setMnemonic(KeyEvent.VK_H);
+
+        m = new JMenuItem("Rules");
+        m.setMnemonic(KeyEvent.VK_A);
+        m.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame2, "Game Rules \n Welcome to LinkFour \n The game rules are same as the traditional Connect Four game. \n Use the buttons above to drop a piece in the column. \n PLayer 1 will be black and player 2 will be yellow. \n Take turns to drop a piece in the column until one player Links Four pieces in any direction.");
+            }
+        });
+        menu.add(m);
+
         
         m = new JMenuItem("About"); 
         m.setMnemonic(KeyEvent.VK_A);
+        m.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame2, "Developed by Jason Wong and Siddharth Shah. \n Developed the game for the passion for bring back the classic game connect four on desktop version. \n We really enjoy playing the game, hope you do too.");
+            }
+        });
         menu.add(m); 
         menuBar.add(menu); 
         
@@ -77,10 +97,22 @@ public class LinkFourView implements ActionListener {
 		
 	}
 
-	
-//	public void setPlayerColor() {
-    //  }
 
+
+
+
+//bring out a pop-window to confirm the exit action
+    public void Close() {
+
+       int  choice = JOptionPane.showConfirmDialog(null, "Are you sure to Exit",
+                "Confirmation", JOptionPane.YES_NO_OPTION);
+
+        if (choice == 0) {
+            System.out.println("Exit Button Clicked. Right? ");
+            frame.setVisible(false);
+            frame.dispose();
+        }
+    }
 
 	public void CreateGrid()
 	{
@@ -122,6 +154,10 @@ public class LinkFourView implements ActionListener {
                   //int d=0;
                   InputPiece(y, a);
                   board.ChangePlayer();
+                  //coreLogic.winDiagonal();
+                  //coreLogic.winHorizontal();
+                  //coreLogic.winVertical();
+                  //coreLogic.gameover();
                   //if(){
                     //  buttons[0].setEnabled(false);
 
@@ -190,6 +226,9 @@ public class LinkFourView implements ActionListener {
 		label.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 */
+
+
+
 
 
 	
