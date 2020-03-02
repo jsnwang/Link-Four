@@ -20,6 +20,10 @@ public class LinkFourView implements ActionListener {
     public ImageIcon black;
     public ImageIcon yellow;
     public ImageIcon white;
+    JTextField field1 = new JTextField();
+    JTextField field2 = new JTextField();
+    JTextField field3 = new JTextField();
+    JTextField field4 = new JTextField();
     CoreLogic coreLogic = new CoreLogic();
     
     Image image;
@@ -43,16 +47,27 @@ public class LinkFourView implements ActionListener {
         menu.setMnemonic(KeyEvent.VK_F);
         
         // create menuitems 
-        m = new JMenuItem("New Game"); 
+        m = new JMenuItem("New Game");
         m.setMnemonic(KeyEvent.VK_N);
         m.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                newGamePopUp();
                 CreateGrid();
+                
+            }
+        });
+        menu.add(m);
+
+        m = new JMenuItem("Preferences");
+        m.setMnemonic(KeyEvent.VK_N);
+        m.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                selecrPieceColor();
 
             }
         });
-        menu.add(m); 
-        
+        menu.add(m);
+
         m = new JMenuItem("Exit"); 
         m.setMnemonic(KeyEvent.VK_E);
         m.addActionListener(new ActionListener() {
@@ -97,7 +112,33 @@ public class LinkFourView implements ActionListener {
 		
 	}
 
+	public void  selecrPieceColor(){
+        Object[] text ={
+                "Player 1", field3,
+                "Player 2", field4,
+        };
+        int option = JOptionPane.showConfirmDialog(null, text, "Select your piece color", JOptionPane.OK_CANCEL_OPTION);
+        if (option == JOptionPane.OK_OPTION)
+        {
+            ImageIcon p1Image ;
+            ImageIcon p2Image ;
+        }
+    }
 
+public void newGamePopUp(){
+   Object[] input ={
+           "Player 1", field1,
+           "Player 2", field2,
+   };
+    int option = JOptionPane.showConfirmDialog(null, input, "Enter all your values", JOptionPane.OK_CANCEL_OPTION);
+    if (option == JOptionPane.OK_OPTION)
+    {
+        String p1 = field1.getText();
+        String p2 = field2.getText();
+    }
+
+
+}
 
 
 

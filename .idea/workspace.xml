@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="738743f9-c47b-40b9-b35e-044f20189074" name="Default Changelist" comment="board class">
-      <change beforePath="$PROJECT_DIR$/src/LinkFour/LinkFour.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LinkFour/LinkFour.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LinkFour/LinkFourView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LinkFour/LinkFourView.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -43,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/LinkFour/LinkFour.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="425">
+              <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#366#479#0" expanded="true" />
@@ -57,15 +56,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/LinkFour/LinkFourView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
+            <state relative-caret-position="68">
+              <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1539#1540#0" expanded="true" />
-                <element signature="e#1578#1579#0" expanded="true" />
+                <element signature="e#2014#2015#0" expanded="true" />
+                <element signature="e#2053#2054#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -91,6 +90,7 @@
       <find>playerTurn</find>
       <find>panel2</find>
       <find>labe</find>
+      <find>field1</find>
     </findStrings>
     <replaceStrings>
       <replace>remainingSpots</replace>
@@ -115,8 +115,8 @@
         <option value="$PROJECT_DIR$/src/Board.java" />
         <option value="$PROJECT_DIR$/src/LinkFour/Board.java" />
         <option value="$PROJECT_DIR$/src/LinkFour/CoreLogic.java" />
-        <option value="$PROJECT_DIR$/src/LinkFour/LinkFourView.java" />
         <option value="$PROJECT_DIR$/src/LinkFour/LinkFour.java" />
+        <option value="$PROJECT_DIR$/src/LinkFour/LinkFourView.java" />
       </list>
     </option>
   </component>
@@ -130,7 +130,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1905" />
     <option name="width" value="1948" />
     <option name="height" value="2098" />
@@ -235,7 +235,7 @@
       <option name="presentableId" value="Default" />
       <updated>1582684191271</updated>
       <workItem from="1582684193016" duration="22043000" />
-      <workItem from="1583028873948" duration="20232000" />
+      <workItem from="1583028873948" duration="21587000" />
     </task>
     <task id="LOCAL-00001" summary="board class">
       <created>1582923124064</created>
@@ -269,7 +269,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="42344000" />
+    <option name="totallyTimeSpent" value="43699000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -281,10 +281,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="762" y="0" width="779" height="839" extended-state="0" />
+    <frame x="-6" y="-6" width="1549" height="846" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49791667" visible="true" weight="0.041608877" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49791667" visible="true" weight="0.020120725" />
       <window_info id="Structure" order="1" sideWeight="0.50208336" side_tool="true" weight="0.23742455" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -293,7 +293,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.50208336" side_tool="true" weight="0.23876593" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.43527833" weight="0.92524683" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.43527833" weight="0.924581" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49966466" weight="0.39944133" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -397,26 +397,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/LinkFour/LinkFourView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1539#1540#0" expanded="true" />
-            <element signature="e#1578#1579#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/LinkFour/LinkFour.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
+        <state relative-caret-position="425">
+          <caret line="25" column="5" lean-forward="true" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#366#479#0" expanded="true" />
             <element signature="e#478#479#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/LinkFour/LinkFourView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="55" column="16" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2014#2015#0" expanded="true" />
+            <element signature="e#2053#2054#0" expanded="true" />
           </folding>
         </state>
       </provider>
