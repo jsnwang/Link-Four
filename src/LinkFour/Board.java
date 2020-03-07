@@ -7,7 +7,7 @@ import javax.swing.SwingConstants;
 
 public class Board {
 
-	public int[][] board = new int[7][6];
+	public static int[][] board = new int[7][6];
 	public int playerTurn = 1;
 
 	 
@@ -25,6 +25,7 @@ public class Board {
 		int c = col;
 		int r;
 		for(r = 0; r < 6; r++){
+			//System.out.println(board[c][r]);
 			if( board[c][r] != 0){
 				if(r == 0){
 					break; //Return false if column is already filled
@@ -35,13 +36,23 @@ public class Board {
 				break;
 			}
 		}
-		board[c][r] = playerTurn; //Set the value of that position to the player's piece
+		board[col][r] = playerTurn; //Set the value of that position to the player's piece
+		
+		 
 			
 		return r;
 	}
 
 
 	public void ChangePlayer() {
+		/*for(int r = 0; r < 6; r++){
+			for(int c = 0; c < 7; c++){
+				System.out.print(board[c][r]); //Loop through array and set all values to 0
+				if(c == 6)
+					System.out.println("");
+			}
+		}
+		*/
 	      if(playerTurn == 1)
 	      {
 	        playerTurn = 2;
@@ -50,8 +61,12 @@ public class Board {
 	      {
 	        playerTurn = 1;
 	      }
-	    }
-
+	 }
+	
+	public int[][] GetBoard()
+	{
+		return board;
+	}
 
 
 }

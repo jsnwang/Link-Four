@@ -6,29 +6,64 @@ import java.awt.event.*;
 
 public class CoreLogic implements ActionListener{
 
-//LinkFourView linkFourView = new LinkFourView();
-    private JFrame frame1 = new JFrame("Game Over");
-    int r;
-    int c;
-    Board b = new Board();
+	static LinkFourView view = new LinkFourView();
+    private static JFrame frame1 = new JFrame("Game Over");
+    public static int r, c;
     //check if the pieces are together
-    public boolean fourConnected(int w, int x, int y, int z) {
+    public static boolean FourConnected(int w, int x, int y, int z) {
         if (w == x && w == y && w == z) {
             return true;
         }
 
         return false;
     }
+    /*public static int CheckWinner(){
+		int r,c;
+		
+		for(r=0; r<6; r++){
+			for(c=0; c<7; c++){
+				if(Board.board[c][r]!=0){ //If it's not an empty spot
+					
+					if(r<3){ //Only need to check the first 4 rows, also to prevent array out of bound error( board[c][r+3] when r>3; r+3 is out of bound)
+						if( FourConnected(Board.board[c][r], Board.board[c][r+1], Board.board[c][r+2], Board.board[c][r+3]) ){ //Check each column, if 4 pieces are connected vertically
+							return Board.board[c][r]; //Return the winning player
+						}
+					}
+					
+					if(c<4){ //Only need to check the first 4 columns
+						if( FourConnected(Board.board[c][r], Board.board[c+1][r], Board.board[c+2][r], Board.board[c+3][r]) ){ //In each row, check if 4 pieces are connected horizontally
+							return Board.board[c][r]; //Return the winning player
+						}
+					}
+					
+					if(r<3&&c<4){ //Prevent out of bound error
+						if( FourConnected(Board.board[c][r], Board.board[c+1][r+1], Board.board[c+2][r+2], Board.board[c+3][r+3]) ){ //Check diagonally, down right
+							return Board.board[c][r]; //Return the winning player
+						}
+					}
+								
+					if(r>3&&c<4){ //Prevent out of bound error
+						if( FourConnected(Board.board[c][r], Board.board[c+1][r-1], Board.board[c+2][r-2], Board.board[c+3][r-3]) ){ //Check diagonally, down left
+							return Board.board[c][r]; //Return the winning player
+						}
+					}
+					
+				}			
+			}
+		}
 
-    public int winVertical() {
-        System.out.println("verti was called");
+	    return 0; //No player has won
+	}
+	*/
+	
+    public static int WinVertical() {
         for (r = 0; r < 6; r++) {
             for (c = 0; c < 7; c++) {
-                if (b.board[c][r] != 0) {
+                if (Board.board[c][r] != 0) {
                     if (r < 3) {
-                        if (fourConnected(b.board[c][r], b.board[c][r + 1], b.board[c][r + 2], b.board[c][r + 3])) {
-                            gameover();
-                            return b.board[c][r];
+                        if (FourConnected(Board.board[c][r], Board.board[c][r + 1], Board.board[c][r + 2], Board.board[c][r + 3])) {
+                            ;
+                            return Board.board[c][r];
                         }
                     }
 
@@ -39,15 +74,14 @@ public class CoreLogic implements ActionListener{
         return 0;
     }
 
-    public int winHorizontal() {
-        System.out.println("hori was called");
+    public static int WinHorizontal() {
         for (r = 0; r < 6; r++) {
             for (c = 0; c < 7; c++) {
-                if (b.board[c][r] != 0) {
+                if (Board.board[c][r] != 0) {
                     if (c < 4) {
-                        if (fourConnected(b.board[c][r], b.board[c + 1][r], b.board[c + 2][r], b.board[c + 3][r])) {
-                            gameover();
-                            return b.board[c][r];
+                        if (FourConnected(Board.board[c][r], Board.board[c + 1][r], Board.board[c + 2][r], Board.board[c + 3][r])) {
+                           
+                            return Board.board[c][r];
                         }
                     }
                 }
@@ -56,48 +90,52 @@ public class CoreLogic implements ActionListener{
         return 0;
     }
 
-            public int winDiagonal() {
-                System.out.println("diagonal was called");
-                for (r = 0; r < 6; r++) {
-                    for (c = 0; c < 7; c++) {
-                        if (b.board[c][r] != 0) {
-                            if (r < 3 && c < 4) {
-                                if (fourConnected(b.board[c][r], b.board[c + 1][r + 1], b.board[c + 2][r + 2], b.board[c + 3][r + 3])) {
-                                    gameover();
-                                    return b.board[c][r];
-                                }
-                            }
-                            if (r>3 && c<4){
-                                {
-                                    if(fourConnected(b.board[c][r], b.board[c + 1][r - 1], b.board[c + 2][r - 2], b.board[c + 3][r - 3])) {
-                                        gameover();
-                                        return b.board[c][r];
-                                    }
-                                }
+    public static int WinDiagonal() {
+    	for (r = 0; r < 6; r++) {
+    		for (c = 0; c < 7; c++) {
+    			if (Board.board[c][r] != 0) {
+    				if(r < 3 && c < 4){ //Prevent out of bound error
+						if( FourConnected(Board.board[c][r], Board.board[c + 1][r + 1], Board.board[c + 2][r + 2], Board.board[c + 3][r + 3]) ){ //Check diagonally, down right
+							return Board.board[c][r]; //Return the winning player
+						}
+					}
+								
+					if(r > 3 && c<4){ //Prevent out of bound error
+						if( FourConnected(Board.board[c][r], Board.board[c + 1][r - 1], Board.board[c + 2][r - 2], Board.board[c + 3][r - 3]) ){ //Check diagonally, down left
+							return Board.board[c][r]; //Return the winning player
+						}
+					}
+    			}
+    		}
+    	}
+    	return 0;
+    }
 
-                            }
-                            else {
-                                return 0;
-                            }
-                        }
-                    }
-                }
-                return 0;
+
+
+            
+    public static void GameOver(int winner){
+        
+    	
+        if(winner != 0){
+        	System.out.println("The winner is: " + winner);
+            int choice = JOptionPane.showConfirmDialog(frame1, "Player " + winner + " has won. \n"
+            		+ "New Game?", "Game Over", JOptionPane.YES_NO_OPTION); 
+            if (choice == 0)
+            {
+            	view.NewGame();
+            	
             }
-
-
-
-    public void gameover(){
-        System.out.println("game over was called");
-         int horiWinner;
+        }
+         /*int horiWinner;
          int vertiWinner;
          int diagWinner;
         horiWinner = winHorizontal();
         diagWinner = winDiagonal();
         vertiWinner = winVertical();
 
-        if(horiWinner!=0){
-            if(horiWinner ==1){
+        if(horiWinner != 0){
+            if(horiWinner == 1){
                 JOptionPane.showMessageDialog(frame1, "color has won.");
             }
             else {
@@ -120,12 +158,13 @@ public class CoreLogic implements ActionListener{
                 JOptionPane.showMessageDialog(frame1, "color has won.");
             }
         }
+        */
 
     }
     public void actionPerformed(ActionEvent e)
     {
-        //CreateGrid();
-            gameover();
+        //LinkFourView.CreateGrid();
+    	//GameOver(CheckWinner());
 
 
     }

@@ -11,6 +11,7 @@ public class LinkFourView implements ActionListener {
 
     public JFrame frame = new JFrame("Link Four");
     public JFrame frame2 = new JFrame("About");
+    JPanel panel = (JPanel) frame.getContentPane();
   //  private JFrame closeFrame = new JFrame();
     public JLabel[][] slots;
    // public JLabel label;
@@ -53,6 +54,7 @@ public class LinkFourView implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 newGamePopUp();
                 CreateGrid();
+                board = new Board();
                 
             }
         });
@@ -62,7 +64,7 @@ public class LinkFourView implements ActionListener {
         m.setMnemonic(KeyEvent.VK_N);
         m.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                selecrPieceColor();
+                selectPieceColor();
 
             }
         });
@@ -99,7 +101,7 @@ public class LinkFourView implements ActionListener {
         m.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame2, "Developed by Jason Wong and Siddharth Shah. \n Developed the game for the passion for bring back the classic game connect four on desktop version. \n We really enjoy playing the game, hope you do too.");
+                JOptionPane.showMessageDialog(frame2, "Developed by Jason Wang and Siddharth Shah. \n Developed the game to bring the classic Connect Four board game to your desktop! \n We really enjoy playing the game, hope you do too.");
             }
         });
         menu.add(m); 
@@ -112,7 +114,7 @@ public class LinkFourView implements ActionListener {
 		
 	}
 
-	public void  selecrPieceColor(){
+	public void  selectPieceColor(){
         Object[] text ={
                 "Player 1", field3,
                 "Player 2", field4,
@@ -145,7 +147,7 @@ public void newGamePopUp(){
 //bring out a pop-window to confirm the exit action
     public void Close() {
 
-       int  choice = JOptionPane.showConfirmDialog(null, "Are you sure to Exit",
+       int  choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?",
                 "Confirmation", JOptionPane.YES_NO_OPTION);
 
         if (choice == 0) {
@@ -158,7 +160,7 @@ public void newGamePopUp(){
 	public void CreateGrid()
 	{
 		
-		JPanel panel = (JPanel) frame.getContentPane();
+		board = new Board();
 		panel.removeAll();
 
 		white = new ImageIcon("white.png");
@@ -183,8 +185,10 @@ public void newGamePopUp(){
         panel.add(buttons[4]);
         panel.add(buttons[5]);
         panel.add(buttons[6]);
+        
         int max=0;
-      for(int i = 0; i < 7; i++){
+      
+        for(int i = 0; i < 7; i++){
           buttons[i].setActionCommand("" + i);
           buttons[i].addActionListener(new ActionListener() {
               @Override
@@ -195,16 +199,17 @@ public void newGamePopUp(){
                   //int d=0;
                   InputPiece(y, a);
                   board.ChangePlayer();
-                  //coreLogic.winDiagonal();
-                  //coreLogic.winHorizontal();
-                  //coreLogic.winVertical();
+                  
+                  CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                  CoreLogic.GameOver(CoreLogic.WinVertical());
+                  CoreLogic.GameOver(CoreLogic.WinDiagonal());
+                  
+                 
                   //coreLogic.gameover();
                   //if(){
                     //  buttons[0].setEnabled(false);
 
                   //}
-                  System.out.println(a);
-                  System.out.println(y);
                  // coreLogic.gameover();
 
 
@@ -215,7 +220,6 @@ public void newGamePopUp(){
         
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
-            	System.out.println(i +", " +j);
                 slots[i][j] = new JLabel(white);
                 slots[i][j].setHorizontalAlignment(SwingConstants.CENTER);
                 slots[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
@@ -226,7 +230,7 @@ public void newGamePopUp(){
 		frame.setContentPane(panel);
         frame.setSize(700, 600);
 		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 	}
 	
@@ -256,7 +260,12 @@ public void newGamePopUp(){
 		
 		
 	}
-
+	
+	public void NewGame()
+	{
+		CreateGrid();
+		CreateMenuBar();
+	}
 	/*public void CreatePlayerTags()
 	{
 		JPanel panel2 = new JPanel();
@@ -275,7 +284,7 @@ public void newGamePopUp(){
 	
 	public void actionPerformed(ActionEvent e) 
     { 
-        CreateGrid();
+        NewGame();
         //coreLogic.gameover();
         // set the label to the menuItem that is selected 
        

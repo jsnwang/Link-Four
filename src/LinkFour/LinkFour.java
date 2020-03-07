@@ -11,8 +11,6 @@ public class LinkFour {
 		view.CreateMenuBar();
 		view.CreateGrid();
 		//view.CreatePlayerTags();
-		CoreLogic coreLogic = new CoreLogic();
-		coreLogic.gameover();
 
 		view.frame.addWindowListener(new WindowAdapter() {
 			@Override
