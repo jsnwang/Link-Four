@@ -14,8 +14,10 @@ public class LinkFourView implements ActionListener {
     JPanel panel = (JPanel) frame.getContentPane();
     public JLabel[][] slots;
     public JButton[] buttons;
-    public String p1 = "Player 1";
-    public String p2 = "Player 2";
+    static String p1Name;
+    static String p2Name;
+    static ImageIcon p1Image;
+    static ImageIcon p2Image;
    public  String buttonText1 = "1";
     public String buttonText2 ="2";
     public String buttonText3 ="3";
@@ -118,28 +120,30 @@ public class LinkFourView implements ActionListener {
 	}
 
 	public void  selectPieceColor(){
-        Object[] text ={
-                p1, field3,
-                p2,field4,
+       Object[] text ={
+                p1Image, field3,
+                p2Image,field4,
         };
-        int option = JOptionPane.showConfirmDialog(null, text, "Select your piece color", JOptionPane.OK_CANCEL_OPTION);
-        if (option == JOptionPane.OK_OPTION)
-        {
-            ImageIcon p1Image ;
-            ImageIcon p2Image ;
-        }
+       // int option = JOptionPane.showConfirmDialog(null, text, "Select your piece color", JOptionPane.OK_CANCEL_OPTION);
+       // if (option == JOptionPane.OK_OPTION)
+        //{
+           // ImageIcon p1Image ;
+            //ImageIcon p2Image ;
+        //}
+
+
     }
 
 public void newGamePopUp(){
-   Object[] input ={
-           p1, field3,
-           p2,field4,
-   };
-    int option = JOptionPane.showConfirmDialog(null, input, "Enter all your values", JOptionPane.OK_CANCEL_OPTION);
+  /* Object[] input ={
+           p1Name, field3,
+           p2Name,field4,
+   };*/
+    int option = JOptionPane.showConfirmDialog(null, "If yes, then click OK","Are you sure?", JOptionPane.OK_CANCEL_OPTION);
     if (option == JOptionPane.OK_OPTION)
     {
-         p1 = field1.getText();
-         p2 = field2.getText();
+        p1Name = JOptionPane.showInputDialog("Enter a name for player 1:");
+        p2Name = JOptionPane.showInputDialog("Enter a name for player 2:");
     }
 
 

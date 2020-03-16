@@ -77,12 +77,22 @@ public class CoreLogic implements ActionListener{
 
             
     public static void GameOver(int winner){
-        
+        int choice=0;
     	
         if(winner != 0){
         	System.out.println("The winner is: " + winner);
-            int choice = JOptionPane.showConfirmDialog(frame1, "Player " + winner + " has won. \n"
-            		+ "New Game?", "Game Over", JOptionPane.YES_NO_OPTION); 
+        	if(winner==1){
+                JOptionPane.showMessageDialog(null,view.p1Name + " Won!", "Winner!", JOptionPane.INFORMATION_MESSAGE);
+                choice = JOptionPane.showConfirmDialog(frame1, view.p1Name + " has won. \n"
+                        + "New Game?", "Game Over", JOptionPane.YES_NO_OPTION);
+            }
+        	else {
+                JOptionPane.showMessageDialog(null, view.p2Name + " Won!", "Winner!", JOptionPane.INFORMATION_MESSAGE);
+                choice = JOptionPane.showConfirmDialog(frame1, view.p2Name + " has won. \n"
+                        + "New Game?", "Game Over", JOptionPane.YES_NO_OPTION);
+            }
+
+
             if (choice == 0)
             {
             	view.NewGame();
