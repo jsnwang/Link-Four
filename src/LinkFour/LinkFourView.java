@@ -16,9 +16,18 @@ public class LinkFourView implements ActionListener {
     public JButton[] buttons;
     public String p1 = "Player 1";
     public String p2 = "Player 2";
+   public  String buttonText1 = "1";
+    public String buttonText2 ="2";
+    public String buttonText3 ="3";
+    public String buttonText4 ="4";
+    public String buttonText5 ="5";
+    public String buttonText6 ="6";
+    public String buttonText7 ="7";
     public ImageIcon black;
     public ImageIcon yellow;
     public ImageIcon white;
+    public ImageIcon blue;
+    public ImageIcon red;
     JTextField field1 = new JTextField();
     JTextField field2 = new JTextField();
     JTextField field3 = new JTextField();
@@ -164,14 +173,18 @@ public void newGamePopUp(){
 		
 		panel.setLayout(new GridLayout(7, 7));
 		slots = new JLabel[6][7];
-        buttons = new JButton[7];
-		buttons[0] = new JButton("1");
-		buttons[1]= new JButton("2");
-        buttons[2]= new JButton("3");
-        buttons[3]= new JButton("4");
-        buttons[4]= new JButton("5");
-        buttons[5]= new JButton("6");
-        buttons[6]= new JButton("7");
+
+
+       buttons = new JButton[7];
+		buttons[0] = new JButton(buttonText1);
+		buttons[1]= new JButton(buttonText2);
+        buttons[2]= new JButton(buttonText3);
+        buttons[3]= new JButton(buttonText4);
+        buttons[4]= new JButton(buttonText5);
+        buttons[5]= new JButton(buttonText6);
+        buttons[6]= new JButton(buttonText7);
+
+
         panel.add(buttons[0]);
         panel.add(buttons[1]);
         panel.add(buttons[2]);
@@ -193,31 +206,12 @@ public void newGamePopUp(){
                     int y = board.CheckColumn(a);
                     InputPiece(y, a);
                     board.ChangePlayer();
-
-
                     CoreLogic.GameOver(CoreLogic.WinHorizontal());
                     CoreLogic.GameOver(CoreLogic.WinVertical());
                     CoreLogic.GameOver(CoreLogic.WinDiagonal());
 
                 }
             });
-
-           /* buttons[i].addKeyListener(new KeyListener() {
-                @Override
-                public void keyTyped(KeyEvent e) {
-
-                }
-
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    buttons = KeyEvent.getKeyText(e.getKeyCode());
-                }
-
-                @Override
-                public void keyReleased(KeyEvent e) {
-
-                }
-            });*/
         }
 
         
@@ -241,7 +235,7 @@ public void newGamePopUp(){
             public void keyPressed(KeyEvent e) {
                 String button = KeyEvent.getKeyText(e.getKeyCode());
 
-                if(button.equals("0")){
+                if(buttonText1.equals("1")){
                     int a = Integer.parseInt(button);
                     int y = board.CheckColumn(a);
                  InputPiece(y, a);
@@ -250,7 +244,7 @@ public void newGamePopUp(){
                     CoreLogic.GameOver(CoreLogic.WinVertical());
                     CoreLogic.GameOver(CoreLogic.WinDiagonal());
                 }
-                else if (button.equals("1")) {
+                else if (buttonText2.equals("2")) {
                     int a = Integer.parseInt(button);
                     int y = board.CheckColumn(a);
                     InputPiece(y, a);
@@ -259,7 +253,7 @@ public void newGamePopUp(){
                     CoreLogic.GameOver(CoreLogic.WinVertical());
                     CoreLogic.GameOver(CoreLogic.WinDiagonal());
                 }
-                else if (button.equals("2")) {
+                else if (buttonText3.equals("3")) {
                     int a = Integer.parseInt(button);
                     int y = board.CheckColumn(a);
                     InputPiece(y, a);
@@ -268,7 +262,7 @@ public void newGamePopUp(){
                     CoreLogic.GameOver(CoreLogic.WinVertical());
                     CoreLogic.GameOver(CoreLogic.WinDiagonal());
                 }
-                else if (button.equals("3")) {
+                else if (buttonText4.equals("4")) {
                     int a = Integer.parseInt(button);
                     int y = board.CheckColumn(a);
                     InputPiece(y, a);
@@ -277,7 +271,7 @@ public void newGamePopUp(){
                     CoreLogic.GameOver(CoreLogic.WinVertical());
                     CoreLogic.GameOver(CoreLogic.WinDiagonal());
                 }
-                else if (button.equals("4")) {
+                else if (buttonText5.equals("5")) {
                     int a = Integer.parseInt(button);
                     int y = board.CheckColumn(a);
                     InputPiece(y, a);
@@ -286,7 +280,7 @@ public void newGamePopUp(){
                     CoreLogic.GameOver(CoreLogic.WinVertical());
                     CoreLogic.GameOver(CoreLogic.WinDiagonal());
                 }
-                else if (button.equals("5")) {
+                else if (buttonText6.equals("6")) {
                     int a = Integer.parseInt(button);
                     int y = board.CheckColumn(a);
                     InputPiece(y, a);
@@ -295,7 +289,7 @@ public void newGamePopUp(){
                     CoreLogic.GameOver(CoreLogic.WinVertical());
                     CoreLogic.GameOver(CoreLogic.WinDiagonal());
                 }
-                else if (button.equals("6")) {
+                else if (buttonText7.equals("7")) {
                     int a = Integer.parseInt(button);
                     int y = board.CheckColumn(a);
                     InputPiece(y, a);
@@ -331,11 +325,21 @@ public void newGamePopUp(){
         scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         black = new ImageIcon(scaledImage);  // transform it back
 
+        blue = new ImageIcon("blue.png");
+        image = blue.getImage(); // transform it
+        scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        blue = new ImageIcon(scaledImage);  // transform it back
+
         yellow = new ImageIcon("yellow.png");
         image = yellow.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         yellow = new ImageIcon(scaledImage);  // transform it back
-        
+
+        red = new ImageIcon("red.png");
+        image = red.getImage(); // transform it
+        scaledImage = image.getScaledInstance(50, 50,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
+        red = new ImageIcon(scaledImage);  // transform it back
+
 		if(board.playerTurn == 1)
 		{
 			slots[x][y].setIcon(black);
