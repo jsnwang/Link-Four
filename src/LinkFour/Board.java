@@ -45,14 +45,6 @@ public class Board {
 
 
 	public void ChangePlayer() {
-		/*for(int r = 0; r < 6; r++){
-			for(int c = 0; c < 7; c++){
-				System.out.print(board[c][r]); //Loop through array and set all values to 0
-				if(c == 6)
-					System.out.println("");
-			}
-		}
-		*/
 	      if(playerTurn == 1)
 	      {
 	        playerTurn = 2;

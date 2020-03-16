@@ -12,12 +12,10 @@ public class LinkFourView implements ActionListener {
     public JFrame frame = new JFrame("Link Four");
     public JFrame frame2 = new JFrame("About");
     JPanel panel = (JPanel) frame.getContentPane();
-  //  private JFrame closeFrame = new JFrame();
     public JLabel[][] slots;
-   // public JLabel label;
     public JButton[] buttons;
-   // public String p1 = "Player 1";
-    //public String p2 = "Player 2";
+    public String p1 = "Player 1";
+    public String p2 = "Player 2";
     public ImageIcon black;
     public ImageIcon yellow;
     public ImageIcon white;
@@ -25,13 +23,11 @@ public class LinkFourView implements ActionListener {
     JTextField field2 = new JTextField();
     JTextField field3 = new JTextField();
     JTextField field4 = new JTextField();
-    CoreLogic coreLogic = new CoreLogic();
+    //CoreLogic coreLogic = new CoreLogic();
     
     Image image;
     Image scaledImage;
 
- //   private int gridX = 7;
-   // private int gridY = 6;
 	
     Board board = new Board();
 	public void CreateMenuBar()
@@ -105,10 +101,8 @@ public class LinkFourView implements ActionListener {
             }
         });
         menu.add(m); 
-        menuBar.add(menu); 
-        
-        //m1.addActionListener(menu); 
-        
+        menuBar.add(menu);
+
         // add menubar to frame 
         frame.setJMenuBar(menuBar); 
 		
@@ -116,8 +110,8 @@ public class LinkFourView implements ActionListener {
 
 	public void  selectPieceColor(){
         Object[] text ={
-                "Player 1", field3,
-                "Player 2", field4,
+                p1, field3,
+                p2,field4,
         };
         int option = JOptionPane.showConfirmDialog(null, text, "Select your piece color", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION)
@@ -129,14 +123,14 @@ public class LinkFourView implements ActionListener {
 
 public void newGamePopUp(){
    Object[] input ={
-           "Player 1", field1,
-           "Player 2", field2,
+           p1, field3,
+           p2,field4,
    };
     int option = JOptionPane.showConfirmDialog(null, input, "Enter all your values", JOptionPane.OK_CANCEL_OPTION);
     if (option == JOptionPane.OK_OPTION)
     {
-        String p1 = field1.getText();
-        String p2 = field2.getText();
+         p1 = field1.getText();
+         p2 = field2.getText();
     }
 
 
@@ -185,37 +179,46 @@ public void newGamePopUp(){
         panel.add(buttons[4]);
         panel.add(buttons[5]);
         panel.add(buttons[6]);
-        
-        int max=0;
+
+
+
+
       
-        for(int i = 0; i < 7; i++){
-          buttons[i].setActionCommand("" + i);
-          buttons[i].addActionListener(new ActionListener() {
-              @Override
-              public void actionPerformed(ActionEvent e) {
-                  int a = Integer.parseInt(e.getActionCommand());
-                  int y = board.CheckColumn(a);
-                 // int c=0;
-                  //int d=0;
-                  InputPiece(y, a);
-                  board.ChangePlayer();
-                  
-                  CoreLogic.GameOver(CoreLogic.WinHorizontal());
-                  CoreLogic.GameOver(CoreLogic.WinVertical());
-                  CoreLogic.GameOver(CoreLogic.WinDiagonal());
-                  
-                 
-                  //coreLogic.gameover();
-                  //if(){
-                    //  buttons[0].setEnabled(false);
-
-                  //}
-                 // coreLogic.gameover();
+        for(int i = 0; i < 7; i++) {
+            buttons[i].setActionCommand("" + i);
+            buttons[i].addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int a = Integer.parseInt(e.getActionCommand());
+                    int y = board.CheckColumn(a);
+                    InputPiece(y, a);
+                    board.ChangePlayer();
 
 
-              }
-          });
-      }
+                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                    CoreLogic.GameOver(CoreLogic.WinVertical());
+                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
+
+                }
+            });
+
+           /* buttons[i].addKeyListener(new KeyListener() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    buttons = KeyEvent.getKeyText(e.getKeyCode());
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+
+                }
+            });*/
+        }
 
         
         for (int i = 0; i < 6; i++) {
@@ -226,7 +229,92 @@ public void newGamePopUp(){
                 panel.add(slots[i][j]);
             }
         }
-		
+
+
+        frame.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                String button = KeyEvent.getKeyText(e.getKeyCode());
+
+                if(button.equals("0")){
+                    int a = Integer.parseInt(button);
+                    int y = board.CheckColumn(a);
+                 InputPiece(y, a);
+                    board.ChangePlayer();
+                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                    CoreLogic.GameOver(CoreLogic.WinVertical());
+                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
+                }
+                else if (button.equals("1")) {
+                    int a = Integer.parseInt(button);
+                    int y = board.CheckColumn(a);
+                    InputPiece(y, a);
+                    board.ChangePlayer();
+                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                    CoreLogic.GameOver(CoreLogic.WinVertical());
+                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
+                }
+                else if (button.equals("2")) {
+                    int a = Integer.parseInt(button);
+                    int y = board.CheckColumn(a);
+                    InputPiece(y, a);
+                    board.ChangePlayer();
+                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                    CoreLogic.GameOver(CoreLogic.WinVertical());
+                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
+                }
+                else if (button.equals("3")) {
+                    int a = Integer.parseInt(button);
+                    int y = board.CheckColumn(a);
+                    InputPiece(y, a);
+                    board.ChangePlayer();
+                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                    CoreLogic.GameOver(CoreLogic.WinVertical());
+                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
+                }
+                else if (button.equals("4")) {
+                    int a = Integer.parseInt(button);
+                    int y = board.CheckColumn(a);
+                    InputPiece(y, a);
+                    board.ChangePlayer();
+                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                    CoreLogic.GameOver(CoreLogic.WinVertical());
+                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
+                }
+                else if (button.equals("5")) {
+                    int a = Integer.parseInt(button);
+                    int y = board.CheckColumn(a);
+                    InputPiece(y, a);
+                    board.ChangePlayer();
+                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                    CoreLogic.GameOver(CoreLogic.WinVertical());
+                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
+                }
+                else if (button.equals("6")) {
+                    int a = Integer.parseInt(button);
+                    int y = board.CheckColumn(a);
+                    InputPiece(y, a);
+                    board.ChangePlayer();
+                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                    CoreLogic.GameOver(CoreLogic.WinVertical());
+                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
+                }
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        });
+
+
+        frame.setFocusable(true);
 		frame.setContentPane(panel);
         frame.setSize(700, 600);
 		frame.setVisible(true);
@@ -276,6 +364,7 @@ public void newGamePopUp(){
 		label.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 */
+
 
 
 

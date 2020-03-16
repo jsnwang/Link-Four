@@ -10,7 +10,7 @@ public class LinkFour {
 		LinkFourView view = new LinkFourView();
 		view.CreateMenuBar();
 		view.CreateGrid();
-		//view.CreatePlayerTags();
+
 
 		view.frame.addWindowListener(new WindowAdapter() {
 			@Override
