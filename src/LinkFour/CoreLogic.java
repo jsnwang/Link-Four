@@ -4,12 +4,14 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 
-public class CoreLogic implements ActionListener{
+public class CoreLogic{
 
 	static LinkFourView view = new LinkFourView();
     private static JFrame frame1 = new JFrame("Game Over");
     public static int r, c;
-    //check if the pieces are together
+    
+    
+
     public static boolean FourConnected(int w, int x, int y, int z) {
         if (w == x && w == y && w == z) {
             return true;
@@ -24,7 +26,7 @@ public class CoreLogic implements ActionListener{
                 if (Board.board[c][r] != 0) {
                     if (r < 3) {
                         if (FourConnected(Board.board[c][r], Board.board[c][r + 1], Board.board[c][r + 2], Board.board[c][r + 3])) {
-                            ;
+                            
                             return Board.board[c][r];
                         }
                     }
@@ -56,15 +58,15 @@ public class CoreLogic implements ActionListener{
     	for (r = 0; r < 6; r++) {
     		for (c = 0; c < 7; c++) {
     			if (Board.board[c][r] != 0) {
-    				if(r < 3 && c < 4){ //Prevent out of bound error
+    				if(r < 3 && c < 4){ 
 						if( FourConnected(Board.board[c][r], Board.board[c + 1][r + 1], Board.board[c + 2][r + 2], Board.board[c + 3][r + 3]) ){ //Check diagonally, down right
-							return Board.board[c][r]; //Return the winning player
+							return Board.board[c][r]; 
 						}
 					}
 								
-					if(r > 3 && c<4){ //Prevent out of bound error
+					if(r > 3 && c<4){ 
 						if( FourConnected(Board.board[c][r], Board.board[c + 1][r - 1], Board.board[c + 2][r - 2], Board.board[c + 3][r - 3]) ){ //Check diagonally, down left
-							return Board.board[c][r]; //Return the winning player
+							return Board.board[c][r]; 
 						}
 					}
     			}
@@ -76,7 +78,8 @@ public class CoreLogic implements ActionListener{
 
 
             
-    public static void GameOver(int winner){
+    @SuppressWarnings("static-access")
+	public static void GameOver(int winner){
         int choice = 0;
     	
         if(winner != 0){
@@ -105,13 +108,19 @@ public class CoreLogic implements ActionListener{
             	
             }
         }
+        
+        if(Board.movesLeft == 0)
+        {
+        	choice = JOptionPane.showConfirmDialog(frame1, "Draw. \n"
+            		+ "New Game?", "Game Over", JOptionPane.YES_NO_OPTION); 
+        	if (choice == 0)
+            {
+            	view.NewGame();
+            	
+            }
+        }
     }
-    public void actionPerformed(ActionEvent e)
-    {
-        //LinkFourView.CreateGrid();
-    	//GameOver(CheckWinner());
+    
 
-
-    }
 
 }

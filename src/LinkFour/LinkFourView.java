@@ -32,15 +32,10 @@ public class LinkFourView implements ActionListener {
     
     static ImageIcon p1Image = black;
     static ImageIcon p2Image = red;
-    //  JTextField field1 = new JTextField();
-    //JTextField field2 = new JTextField();
-    //JTextField field3 = new JTextField();
-    //JTextField field4 = new JTextField();
-    //CoreLogic coreLogic = new CoreLogic();
 
     Image image;
     Image scaledImage;
-
+    static KeyListener key;
 
     Board board = new Board();
 
@@ -62,8 +57,8 @@ public class LinkFourView implements ActionListener {
         m.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 newGamePopUp();
-                CreateGrid();
-                board = new Board();
+                NewGame();
+
 
             }
         });
@@ -148,23 +143,42 @@ public class LinkFourView implements ActionListener {
         String selectionp2 = Obj.toString();
         if(selectionp2 == "red"){
             p2Image = red;
+            if (p2Image == p1Image)
+            {
+            	System.out.print(p1Image + " " + p2Image);
+            	JOptionPane.showMessageDialog(frame, "Color cannot be the same as Player 1.");
+            	selectPieceColorp2();
+            }
         }
         else if(selectionp2 == "blue"){
             p2Image = blue;
+            if (p2Image == p1Image)
+            {
+            	System.out.print(p1Image + " " + p2Image);
+            	JOptionPane.showMessageDialog(frame, "Color cannot be the same as Player 1.");
+            	selectPieceColorp2();
+            }
         }
         else if (selectionp2 == "black"){
             p2Image = black;
+            if (p2Image == p1Image)
+            {
+            	System.out.print(p1Image + " " + p2Image);
+            	JOptionPane.showMessageDialog(frame, "Color cannot be the same as Player 1.");
+            	selectPieceColorp2();
+            }
         }
         else if (selectionp2 == "yellow"){
             p2Image = yellow;
+            if (p2Image == p1Image)
+            {
+            	System.out.print(p1Image + " " + p2Image);
+            	JOptionPane.showMessageDialog(frame, "Color cannot be the same as Player 1.");
+            	selectPieceColorp2();
+            }
         }
         
-        if (p2Image == p1Image)
-        {
-        	System.out.print(p1Image + " " + p2Image);
-        	JOptionPane.showMessageDialog(frame, "Color cannot be the same as Player 1.");
-        	selectPieceColorp2();
-        }
+        
         return p2Image;
     }
 
@@ -179,7 +193,7 @@ public class LinkFourView implements ActionListener {
     }
 
 
-    //bring out a pop-window to confirm the exit action
+
     public void Close() {
 
         int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?",
@@ -193,7 +207,6 @@ public class LinkFourView implements ActionListener {
     }
 
     public void CreateGrid() {
-
         board = new Board();
         panel.removeAll();
 
@@ -208,12 +221,7 @@ public class LinkFourView implements ActionListener {
 
 
         buttons = new JButton[7];
-     /*  for(int i=0;i<7;i++){
-           buttons[i] = new JButton(""+buttonText1);
-           buttonText1++;
-           panel.add(buttons[i]);
-       }
-*/
+        
         buttons[0] = new JButton(buttonText1);
         buttons[1] = new JButton(buttonText2);
         buttons[2] = new JButton(buttonText3);
@@ -235,6 +243,31 @@ public class LinkFourView implements ActionListener {
         p1Image = black;
         p2Image = blue;
         
+        key = new KeyListener() {
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            public void keyPressed(KeyEvent e) {
+                String button = KeyEvent.getKeyText(e.getKeyCode());
+               
+                int a = Integer.parseInt(button);
+                a--;
+                int y = board.CheckColumn(a);
+                InputPiece(y, a);
+                board.ChangePlayer();
+                CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                CoreLogic.GameOver(CoreLogic.WinVertical());
+                CoreLogic.GameOver(CoreLogic.WinDiagonal());
+                
+
+            }
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+        
+         frame.addKeyListener(key);
         for (int i = 0; i < 7; i++) {
             buttons[i].setActionCommand("" + i);
             buttons[i].addActionListener(new ActionListener() {
@@ -262,33 +295,10 @@ public class LinkFourView implements ActionListener {
             }
         }
 
+        
 
-        frame.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                String button = KeyEvent.getKeyText(e.getKeyCode());
-                int a = Integer.parseInt(button);
-                a--;
-                int y = board.CheckColumn(a);
-                InputPiece(y, a);
-                board.ChangePlayer();
-                CoreLogic.GameOver(CoreLogic.WinHorizontal());
-                CoreLogic.GameOver(CoreLogic.WinVertical());
-                CoreLogic.GameOver(CoreLogic.WinDiagonal());
-                
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
+            
+        
 
 
         frame.setFocusable(true);
@@ -322,14 +332,12 @@ public class LinkFourView implements ActionListener {
         red = new ImageIcon(scaledImage);  // transform it back
 
         if (p1Image != null) {
-            //AssignColortogridp1(x,y);
         	if (board.playerTurn == 1 )
         	{
         		slots[x][y].setIcon(p1Image);
         	}
         	
         	else {
-            // AssignColortogridp2(x,y);
         		slots[x][y].setIcon(p2Image);
         	}
         }
@@ -342,7 +350,6 @@ public class LinkFourView implements ActionListener {
         	}
         	
         	else {
-            // AssignColortogridp2(x,y);
         		slots[x][y].setIcon(blue);
         	}
         }
@@ -350,94 +357,21 @@ public class LinkFourView implements ActionListener {
 
     }
 
-   /* public void AssignColortogridp1(int x, int y) {
-
-        switch (selectPieceColorp1()) {
-            case "red":
-               slots[x][y] == selectPieceColorp1;
-                break;
-            case "blue":
-                slots[x][y].setIcon(blue);
-                break;
-            case "yellow":
-                slots[x][y].setIcon(yellow);
-                break;
-            case "black":
-                slots[x][y].setIcon(black);
-                break;
-            default:
-                slots[x][y].setIcon(black);
-        }
-}
-
-
-public void AssignColortogridp2(int x, int y){
-    switch (selectPieceColorp2()) {
-        case "red":
-            if(selectPieceColorp1()== "red"){
-                //a dialog pops up saying, cant have the same color as p1
-            }else{
-                slots[x][y].setIcon(red);
-            }
-
-            break;
-        case "blue":
-            if(selectPieceColorp1()== "blue"){
-                //a dialog pops up saying, cant have the same color as p1
-            }else{
-                slots[x][y].setIcon(blue);
-            }
-
-            break;
-        case "yellow":
-            if(selectPieceColorp1()== "yellow"){
-                //a dialog pops up saying, cant have the same color as p1
-            }else{
-                slots[x][y].setIcon(yellow);
-            }
-            break;
-        case "black":
-            if(selectPieceColorp1()== "black"){
-                //a dialog pops up saying, cant have the same color as p1
-            }else{
-                slots[x][y].setIcon(black);
-            }
-
-            break;
-        default:
-            slots[x][y].setIcon(yellow);
-    }
-}
-*/
-
-
     public void NewGame()
     {
+    	frame.removeKeyListener(key);
+    	frame.dispose();
+    	CreateMenuBar();
+    	
         CreateGrid();
-        CreateMenuBar();
+        
+        Board.movesLeft = 42;
     }
-	/*public void CreatePlayerTags()
-	{
-		JPanel panel2 = new JPanel();
-		label = new JLabel("Player 1 Wins:", SwingConstants.CENTER);
-		label.setBorder(BorderFactory.createLineBorder(Color.black));
-
-		label = new JLabel("Player 2 Wins:", SwingConstants.CENTER);
-		label.setBorder(BorderFactory.createLineBorder(Color.black));
-	}
-*/
-
-
-
-
-
-
 
     public void actionPerformed(ActionEvent e)
     {
         NewGame();
-        //coreLogic.gameover();
-        // set the label to the menuItem that is selected
+
 
     }
 }
