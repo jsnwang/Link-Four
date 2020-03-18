@@ -197,7 +197,8 @@ public class LinkFourView implements ActionListener {
         board = new Board();
         panel.removeAll();
 
-        white = new ImageIcon("white.png");
+        //white = new ImageIcon("./res/white.png");
+        white = new ImageIcon(getClass().getClassLoader().getResource("white.png"));
         image = white.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         white = new ImageIcon(scaledImage);  // transform it back
@@ -300,22 +301,22 @@ public class LinkFourView implements ActionListener {
 
 
     public void InputPiece(int x, int y) {
-        black = new ImageIcon("black.png");
+        black = new ImageIcon(getClass().getClassLoader().getResource("black.png"));
         image = black.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         black = new ImageIcon(scaledImage);  // transform it back
 
-        blue = new ImageIcon("blue.png");
+        blue = new ImageIcon(getClass().getClassLoader().getResource("blue.png"));
         image = blue.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         blue = new ImageIcon(scaledImage);  // transform it back
 
-        yellow = new ImageIcon("yellow.png");
+        yellow = new ImageIcon(getClass().getClassLoader().getResource("yellow.png"));
         image = yellow.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         yellow = new ImageIcon(scaledImage);  // transform it back
 
-        red = new ImageIcon("red.png");
+        red = new ImageIcon(getClass().getClassLoader().getResource("red.png"));
         image = red.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         red = new ImageIcon(scaledImage);  // transform it back
