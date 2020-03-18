@@ -16,8 +16,7 @@ public class LinkFourView implements ActionListener {
     public JButton[] buttons;
     static String p1Name;
     static String p2Name;
-    static ImageIcon p1Image;
-    static ImageIcon p2Image;
+    
     public String buttonText1 = "1";
     public String buttonText2 = "2";
     public String buttonText3 = "3";
@@ -25,20 +24,18 @@ public class LinkFourView implements ActionListener {
     public String buttonText5 = "5";
     public String buttonText6 = "6";
     public String buttonText7 = "7";
-    public ImageIcon black;
-    public ImageIcon yellow;
-    public ImageIcon white;
-    public ImageIcon blue;
-    public ImageIcon red;
-    //  JTextField field1 = new JTextField();
-    //JTextField field2 = new JTextField();
-    //JTextField field3 = new JTextField();
-    //JTextField field4 = new JTextField();
-    //CoreLogic coreLogic = new CoreLogic();
+    public static ImageIcon black;
+    public static ImageIcon yellow;
+    public static ImageIcon white;
+    public static ImageIcon blue;
+    public static ImageIcon red;
+    
+    static ImageIcon p1Image = black;
+    static ImageIcon p2Image = red;
 
     Image image;
     Image scaledImage;
-
+    static KeyListener key;
 
     Board board = new Board();
 
@@ -60,8 +57,8 @@ public class LinkFourView implements ActionListener {
         m.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 newGamePopUp();
-                CreateGrid();
-                board = new Board();
+                NewGame();
+
 
             }
         });
@@ -98,7 +95,7 @@ public class LinkFourView implements ActionListener {
         m.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame2, "Game Rules \n Welcome to LinkFour \n The game rules are same as the traditional Connect Four game. \n Use the buttons above to drop a piece in the column. \n PLayer 1 will be black and player 2 will be yellow. \n Take turns to drop a piece in the column until one player Links Four pieces in any direction.");
+                JOptionPane.showMessageDialog(frame2, "Game Rules \n Welcome to LinkFour \n The game rules are the same as the traditional Connect Four game. \n Use the buttons above to drop a piece in a column. \n Take turns dropping pieces down the board until one player Links Four pieces in a row.");
             }
         });
         menu.add(m);
@@ -109,7 +106,7 @@ public class LinkFourView implements ActionListener {
         m.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame2, "Developed by Jason Wang and Siddharth Shah. \n Developed the game to bring the classic Connect Four board game to your desktop! \n We really enjoy playing the game, hope you do too.");
+                JOptionPane.showMessageDialog(frame2, "Developed by Jason Wang and Siddharth Shah.");
             }
         });
         menu.add(m);
@@ -125,10 +122,10 @@ public class LinkFourView implements ActionListener {
         Object Obj1 = JOptionPane.showInputDialog(frame, "Player 1 Choose a color please", "Token Color", JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         String selectionp1 = Obj1.toString();
         if(selectionp1 == "red"){
-            p1Image= red;
+            p1Image = red;
         }
         else if(selectionp1 == "blue"){
-            p1Image =blue;
+            p1Image = blue;
         }
         else if (selectionp1 == "black"){
             p1Image = black;
@@ -142,35 +139,61 @@ public class LinkFourView implements ActionListener {
 
     public ImageIcon selectPieceColorp2() {
         Object[] options = {"red", "blue", "black", "yellow"};
-        Object Obj = JOptionPane.showInputDialog(frame, "Player 2 Choose a color please", "Token Color", JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+        Object Obj = JOptionPane.showInputDialog(frame, "Player 2 Choose a color: ", "Token Color", JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         String selectionp2 = Obj.toString();
         if(selectionp2 == "red"){
-            p2Image= red;
+            p2Image = red;
+            if (p2Image == p1Image)
+            {
+            	System.out.print(p1Image + " " + p2Image);
+            	JOptionPane.showMessageDialog(frame, "Color cannot be the same as Player 1.");
+            	selectPieceColorp2();
+            }
         }
         else if(selectionp2 == "blue"){
-            p2Image =blue;
+            p2Image = blue;
+            if (p2Image == p1Image)
+            {
+            	System.out.print(p1Image + " " + p2Image);
+            	JOptionPane.showMessageDialog(frame, "Color cannot be the same as Player 1.");
+            	selectPieceColorp2();
+            }
         }
         else if (selectionp2 == "black"){
             p2Image = black;
+            if (p2Image == p1Image)
+            {
+            	System.out.print(p1Image + " " + p2Image);
+            	JOptionPane.showMessageDialog(frame, "Color cannot be the same as Player 1.");
+            	selectPieceColorp2();
+            }
         }
         else if (selectionp2 == "yellow"){
             p2Image = yellow;
+            if (p2Image == p1Image)
+            {
+            	System.out.print(p1Image + " " + p2Image);
+            	JOptionPane.showMessageDialog(frame, "Color cannot be the same as Player 1.");
+            	selectPieceColorp2();
+            }
         }
+        
+        
         return p2Image;
     }
 
     public void newGamePopUp() {
-        int option = JOptionPane.showConfirmDialog(null, "If yes, then click OK", "Are you sure?", JOptionPane.OK_CANCEL_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, "New Game?", "Are you sure?", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
-            p1Name = JOptionPane.showInputDialog("Enter a name for player 1:");
-            p2Name = JOptionPane.showInputDialog("Enter a name for player 2:");
+            p1Name = JOptionPane.showInputDialog("Enter a name for Player 1:");
+            p2Name = JOptionPane.showInputDialog("Enter a name for Player 2:");
         }
         frame.setVisible(false);
         frame.dispose();
     }
 
 
-    //bring out a pop-window to confirm the exit action
+
     public void Close() {
 
         int choice = JOptionPane.showConfirmDialog(null, "Are you sure you want to exit?",
@@ -184,11 +207,11 @@ public class LinkFourView implements ActionListener {
     }
 
     public void CreateGrid() {
-
         board = new Board();
         panel.removeAll();
 
-        white = new ImageIcon("white.png");
+        //white = new ImageIcon("./res/white.png");
+        white = new ImageIcon(getClass().getClassLoader().getResource("white.png"));
         image = white.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         white = new ImageIcon(scaledImage);  // transform it back
@@ -198,12 +221,7 @@ public class LinkFourView implements ActionListener {
 
 
         buttons = new JButton[7];
-     /*  for(int i=0;i<7;i++){
-           buttons[i] = new JButton(""+buttonText1);
-           buttonText1++;
-           panel.add(buttons[i]);
-       }
-*/
+        
         buttons[0] = new JButton(buttonText1);
         buttons[1] = new JButton(buttonText2);
         buttons[2] = new JButton(buttonText3);
@@ -222,6 +240,34 @@ public class LinkFourView implements ActionListener {
         panel.add(buttons[6]);
 
 
+        p1Image = black;
+        p2Image = blue;
+        
+        key = new KeyListener() {
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            public void keyPressed(KeyEvent e) {
+                String button = KeyEvent.getKeyText(e.getKeyCode());
+               
+                int a = Integer.parseInt(button);
+                a--;
+                int y = board.CheckColumn(a);
+                InputPiece(y, a);
+                board.ChangePlayer();
+                CoreLogic.GameOver(CoreLogic.WinHorizontal());
+                CoreLogic.GameOver(CoreLogic.WinVertical());
+                CoreLogic.GameOver(CoreLogic.WinDiagonal());
+                
+
+            }
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
+        
+         frame.addKeyListener(key);
         for (int i = 0; i < 7; i++) {
             buttons[i].setActionCommand("" + i);
             buttons[i].addActionListener(new ActionListener() {
@@ -249,82 +295,10 @@ public class LinkFourView implements ActionListener {
             }
         }
 
+        
 
-        frame.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                String button = KeyEvent.getKeyText(e.getKeyCode());
-
-                if (buttonText1.equals("1")) {
-                    int a = Integer.parseInt(button);
-                    int y = board.CheckColumn(a);
-                    InputPiece(y, a);
-                    board.ChangePlayer();
-                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
-                    CoreLogic.GameOver(CoreLogic.WinVertical());
-                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
-                } else if (buttonText2.equals("2")) {
-                    int a = Integer.parseInt(button);
-                    int y = board.CheckColumn(a);
-                    InputPiece(y, a);
-                    board.ChangePlayer();
-                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
-                    CoreLogic.GameOver(CoreLogic.WinVertical());
-                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
-                } else if (buttonText3.equals("3")) {
-                    int a = Integer.parseInt(button);
-                    int y = board.CheckColumn(a);
-                    InputPiece(y, a);
-                    board.ChangePlayer();
-                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
-                    CoreLogic.GameOver(CoreLogic.WinVertical());
-                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
-                } else if (buttonText4.equals("4")) {
-                    int a = Integer.parseInt(button);
-                    int y = board.CheckColumn(a);
-                    InputPiece(y, a);
-                    board.ChangePlayer();
-                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
-                    CoreLogic.GameOver(CoreLogic.WinVertical());
-                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
-                } else if (buttonText5.equals("5")) {
-                    int a = Integer.parseInt(button);
-                    int y = board.CheckColumn(a);
-                    InputPiece(y, a);
-                    board.ChangePlayer();
-                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
-                    CoreLogic.GameOver(CoreLogic.WinVertical());
-                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
-                } else if (buttonText6.equals("6")) {
-                    int a = Integer.parseInt(button);
-                    int y = board.CheckColumn(a);
-                    InputPiece(y, a);
-                    board.ChangePlayer();
-                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
-                    CoreLogic.GameOver(CoreLogic.WinVertical());
-                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
-                } else if (buttonText7.equals("7")) {
-                    int a = Integer.parseInt(button);
-                    int y = board.CheckColumn(a);
-                    InputPiece(y, a);
-                    board.ChangePlayer();
-                    CoreLogic.GameOver(CoreLogic.WinHorizontal());
-                    CoreLogic.GameOver(CoreLogic.WinVertical());
-                    CoreLogic.GameOver(CoreLogic.WinDiagonal());
-                }
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        });
+            
+        
 
 
         frame.setFocusable(true);
@@ -337,125 +311,67 @@ public class LinkFourView implements ActionListener {
 
 
     public void InputPiece(int x, int y) {
-        black = new ImageIcon("black.png");
+        black = new ImageIcon(getClass().getClassLoader().getResource("black.png"));
         image = black.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         black = new ImageIcon(scaledImage);  // transform it back
 
-        blue = new ImageIcon("blue.png");
+        blue = new ImageIcon(getClass().getClassLoader().getResource("blue.png"));
         image = blue.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         blue = new ImageIcon(scaledImage);  // transform it back
 
-        yellow = new ImageIcon("yellow.png");
+        yellow = new ImageIcon(getClass().getClassLoader().getResource("yellow.png"));
         image = yellow.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         yellow = new ImageIcon(scaledImage);  // transform it back
 
-        red = new ImageIcon("red.png");
+        red = new ImageIcon(getClass().getClassLoader().getResource("red.png"));
         image = red.getImage(); // transform it
         scaledImage = image.getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
         red = new ImageIcon(scaledImage);  // transform it back
 
-        if (board.playerTurn == 1) {
-            //AssignColortogridp1(x,y);
-            slots[x][y].setIcon(p1Image);
-        } else {
-            // AssignColortogridp2(x,y);
-            slots[x][y].setIcon(p2Image);
+        if (p1Image != null) {
+        	if (board.playerTurn == 1 )
+        	{
+        		slots[x][y].setIcon(p1Image);
+        	}
+        	
+        	else {
+        		slots[x][y].setIcon(p2Image);
+        	}
+        }
+        
+        else
+        {
+        	if (board.playerTurn == 1 )
+        	{
+        		slots[x][y].setIcon(black);
+        	}
+        	
+        	else {
+        		slots[x][y].setIcon(blue);
+        	}
         }
 
 
     }
-
-   /* public void AssignColortogridp1(int x, int y) {
-
-        switch (selectPieceColorp1()) {
-            case "red":
-               slots[x][y] == selectPieceColorp1;
-                break;
-            case "blue":
-                slots[x][y].setIcon(blue);
-                break;
-            case "yellow":
-                slots[x][y].setIcon(yellow);
-                break;
-            case "black":
-                slots[x][y].setIcon(black);
-                break;
-            default:
-                slots[x][y].setIcon(black);
-        }
-}
-
-
-public void AssignColortogridp2(int x, int y){
-    switch (selectPieceColorp2()) {
-        case "red":
-            if(selectPieceColorp1()== "red"){
-                //a dialog pops up saying, cant have the same color as p1
-            }else{
-                slots[x][y].setIcon(red);
-            }
-
-            break;
-        case "blue":
-            if(selectPieceColorp1()== "blue"){
-                //a dialog pops up saying, cant have the same color as p1
-            }else{
-                slots[x][y].setIcon(blue);
-            }
-
-            break;
-        case "yellow":
-            if(selectPieceColorp1()== "yellow"){
-                //a dialog pops up saying, cant have the same color as p1
-            }else{
-                slots[x][y].setIcon(yellow);
-            }
-            break;
-        case "black":
-            if(selectPieceColorp1()== "black"){
-                //a dialog pops up saying, cant have the same color as p1
-            }else{
-                slots[x][y].setIcon(black);
-            }
-
-            break;
-        default:
-            slots[x][y].setIcon(yellow);
-    }
-}
-*/
-
 
     public void NewGame()
     {
+    	frame.removeKeyListener(key);
+    	frame.dispose();
+    	CreateMenuBar();
+    	
         CreateGrid();
-        CreateMenuBar();
+        
+        Board.movesLeft = 42;
     }
-	/*public void CreatePlayerTags()
-	{
-		JPanel panel2 = new JPanel();
-		label = new JLabel("Player 1 Wins:", SwingConstants.CENTER);
-		label.setBorder(BorderFactory.createLineBorder(Color.black));
-
-		label = new JLabel("Player 2 Wins:", SwingConstants.CENTER);
-		label.setBorder(BorderFactory.createLineBorder(Color.black));
-	}
-*/
-
-
-
-
-
-
 
     public void actionPerformed(ActionEvent e)
     {
         NewGame();
-        //coreLogic.gameover();
-        // set the label to the menuItem that is selected
+
 
     }
 }

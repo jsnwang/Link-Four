@@ -1,7 +1,6 @@
 package LinkFour;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 public class LinkFour {
@@ -15,7 +14,7 @@ public class LinkFour {
 		view.frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				view.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+				view.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 				view.Close();
 			}
 
